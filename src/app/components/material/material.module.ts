@@ -9,49 +9,37 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatToolbarModule,
-    MatGridListModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
     MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
+    MatToolbarModule,
   ],
   exports: [
-    MatToolbarModule,
-    MatGridListModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
     MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
     MatInputModule,
     MatRadioModule,
     MatSelectModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatDialogModule,
+    MatToolbarModule,
   ],
 })
 export class MaterialModule {}
