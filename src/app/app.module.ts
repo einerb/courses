@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CourseModalComponent } from './pages/course/course-modal/course-modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from './components/material/material.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -24,6 +25,6 @@ import { StudentModalComponent } from './pages/student/student-modal/student-mod
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [StudentModalComponent],
+  entryComponents: [StudentModalComponent, CourseModalComponent],
 })
 export class AppModule {}

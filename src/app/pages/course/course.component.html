@@ -1,1 +1,62 @@
-<div class="container">h</div>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/home">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">
+        Cursos
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-8 col-md-9">
+      <h1>Cursos</h1>
+    </div>
+    <div class="d-none d-sm-block col-sm-4 col-md-3">
+      <div class="d-flex justify-content-end">
+        <a (click)="onCreate()" class="btn btn-success"
+          >Crear curso <i class="fa fa-plus"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Horario</th>
+          <th scope="col">Fecha inicio</th>
+          <th scope="col">Fecha final</th>
+          <th scope="col">Estudiantes asignados</th>
+          <th scope="col" colspan="2">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of courseData; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ item.name | titlecase }}</td>
+          <td>{{ item.schedule | titlecase }}</td>
+          <td>{{ item.start_date | date: "medium" }}</td>
+          <td>{{ item.end_date | date: "medium" }}</td>
+          <td>{{ count }}</td>
+          <td>
+            <a href="" style="cursor: pointer;"
+              ><i class="fa fa-edit text-primary"></i
+            ></a>
+          </td>
+          <td>
+            <a (click)="deleteCourse(item._id)" style="cursor: pointer;"
+              ><i class="fa fa-trash text-danger"></i
+            ></a>
+          </td>
+        </tr>
+        <tr *ngIf="visible">
+          <td colspan="7">No hay cursos!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
