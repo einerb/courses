@@ -29,7 +29,7 @@ export class CourseService {
       );
   }
 
-  public createStudent(data: any) {
+  public createCourse(data: any) {
     return this.globalService.post(Constant.Endpoints.COURSE.CREATE, data).pipe(
       map((res) => {
         return res;
@@ -37,9 +37,9 @@ export class CourseService {
     );
   }
 
-  public updateStudent(id: any, data: any) {
+  public updateCourse(data: any) {
     return this.globalService
-      .put(Constant.Endpoints.COURSE.UPDATE + '/' + id, data)
+      .put(Constant.Endpoints.COURSE.UPDATE + '/' + data.id, data)
       .pipe(
         map((res) => {
           return res;
@@ -47,7 +47,7 @@ export class CourseService {
       );
   }
 
-  public deleteStudent(id: any) {
+  public deleteCourse(id: any) {
     return this.globalService
       .delete(Constant.Endpoints.COURSE.DELETE + '/' + id)
       .pipe(

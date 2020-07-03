@@ -1,0 +1,41 @@
+<mat-toolbar>
+  <span>Datos de Estudiante</span>
+  <span class="fill-remaining-space"></span>
+  <button
+    class="btn-dialog-close"
+    mat-stroked-button
+    (click)="close()"
+    tabIndex="-1"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label>Nombres</label>
+      <input type="text" class="form-control" formControlName="name" />
+    </div>
+    <div class="form-group col-md-3">
+      <label>Apellidos</label>
+      <input type="text" class="form-control" formControlName="lastname" />
+    </div>
+    <div class="form-group col-md-3">
+      <label>Correo electrónico</label>
+      <input type="text" class="form-control" formControlName="email" />
+    </div>
+    <div class="form-group col-md-3">
+      <label>Edad</label>
+      <input type="text" class="form-control" formControlName="age" />
+    </div>
+    <div class="form-group col-md-1">
+      <button
+        type="submit"
+        class="btn btn-sm btn-success"
+        style="margin-top: 35px;"
+      >
+        Guardar <i class="fa fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</form>

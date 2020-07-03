@@ -49,9 +49,9 @@ export class StudentService {
       );
   }
 
-  public updateStudent(id: any, data: any) {
+  public updateStudent(data: any) {
     return this.globalService
-      .put(Constant.Endpoints.STUDENT.UPDATE + '/' + id, data)
+      .put(Constant.Endpoints.STUDENT.UPDATE + '/' + data.id, data)
       .pipe(
         map((res) => {
           return res;

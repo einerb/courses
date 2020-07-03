@@ -8,9 +8,23 @@ const routes: Routes = [
       import('./pages/student/student.module').then((m) => m.StudentModule),
   },
   {
+    path: `student-details/:_id`,
+    loadChildren: () =>
+      import('./pages/student/student-details/student-details.module').then(
+        (m) => m.StudentDetailsModule
+      ),
+  },
+  {
     path: `courses`,
     loadChildren: () =>
       import('./pages/course/course.module').then((m) => m.CourseModule),
+  },
+  {
+    path: `course-details/:_id`,
+    loadChildren: () =>
+      import('./pages/course/course-details/course-details.module').then(
+        (m) => m.CourseDetailsModule
+      ),
   },
   { path: ``, redirectTo: `home`, pathMatch: `full` },
 ];
