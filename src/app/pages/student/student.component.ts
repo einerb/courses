@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   public selected: Student;
   public selectedRow: number;
   public studentData: Student[];
-  public userToEdit: Student;
+  public studentToEdit: Student;
   public visible = false;
 
   constructor(
@@ -54,7 +54,7 @@ export class StudentComponent implements OnInit {
         this.studentService.deleteStudent(id).subscribe(() => {
           Swal.fire(
             'Eliminado!',
-            'La orden fue eliminada exitosamente.',
+            'El estudiante fue eliminado exitosamente.',
             'success'
           );
           this.allStudents();
@@ -63,10 +63,10 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  public onSelect = (user: Student, index: number) => {
-    this.selected = user;
+  public onSelect(student: Student) {
+    this.selected = student;
     this.editStudent();
-  };
+  }
 
   public setClickedRow = (index: number) => {
     this.selectedRow = index;
@@ -90,7 +90,7 @@ export class StudentComponent implements OnInit {
     modalRef.componentInstance.title = this.editingMode
       ? 'Editar estudiante'
       : 'Crear estudiante';
-    modalRef.componentInstance.userData = this.editingMode
+    modalRef.componentInstance.studentData = this.editingMode
       ? this.selected
       : null;
   }

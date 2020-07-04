@@ -10,7 +10,9 @@
 
   <div class="row mb-3">
     <div class="col-xs-6 col-sm-8 col-md-9">
-      <h4>Cursos</h4>
+      <h4>
+        Cursos
+      </h4>
     </div>
     <div class="d-none d-sm-block col-sm-4 col-md-3">
       <div class="d-flex justify-content-end">
@@ -31,21 +33,32 @@
           <th scope="col">Fecha inicio</th>
           <th scope="col">Fecha final</th>
           <th scope="col">Estudiantes asignados</th>
-          <th scope="col" colspan="2">Acciones</th>
+          <th scope="col">Eliminar</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of courseData; let i = index">
+        <tr
+          *ngFor="let item of courseData; let i = index"
+          (dblclick)="onSelect(item)"
+          (click)="setClickedRow(i)"
+          [class.active]="i == selectedRow"
+          style="cursor: pointer;"
+          title="Doble click para editar"
+        >
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ item.name | titlecase }}</td>
           <td>{{ item.schedule | titlecase }}</td>
-          <td>{{ item.start_date | date: "medium" }}</td>
-          <td>{{ item.end_date | date: "medium" }}</td>
-          <td>{{ this.count }}</td>
+          <td>{{ item.start_date | date: "dd/MM/yyyy" }}</td>
+          <td>{{ item.end_date | date: "fullDate":"CO" }}</td>
           <td>
-            <a href="" style="cursor: pointer;"
-              ><i class="fa fa-edit text-primary"></i
-            ></a>
+            <button
+              type="button"
+              class="btn btn-link"
+              (click)="countStudent(item._id)"
+              style="cursor: pointer;"
+            >
+              Ver cantidad
+            </button>
           </td>
           <td>
             <a (click)="deleteCourse(item._id)" style="cursor: pointer;"
@@ -57,7 +70,10 @@
           <td colspan="7">No hay cursos!</td>
         </tr>
       </tbody>
-    </table><hr>
-    <span class="font-weight-bold float-right">Cantidad de registros: {{ this.courseData?.length }}</span>
+    </table>
+    <hr />
+    <span class="font-weight-bold float-right"
+      >Cantidad de registros: {{ this.courseData?.length }}</span
+    >
   </div>
 </div>

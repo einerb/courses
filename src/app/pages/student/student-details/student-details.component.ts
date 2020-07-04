@@ -15,7 +15,6 @@ import { StudentService } from 'src/app/services/student.service';
 })
 export class StudentDetailsComponent implements OnInit {
   public id;
-  public courseData;
   public studentData;
   public visible;
   public editingMode: boolean;
@@ -46,29 +45,6 @@ export class StudentDetailsComponent implements OnInit {
     });
   }
 
-  public deleteCourse(id: any) {
-    Swal.fire({
-      title: 'Está seguro?',
-      text: 'Sí elimina no podrá recuperar!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, deseo eliminar!',
-    }).then((result) => {
-      if (result.value) {
-        this.courseService.deleteCourse(id).subscribe(() => {
-          Swal.fire(
-            'Eliminado!',
-            'La orden fue eliminada exitosamente.',
-            'success'
-          );
-          this.getId(this.id);
-        });
-      }
-    });
-  }
-
   public addAssign() {
     this.openEditAssignModal();
   }
@@ -80,7 +56,7 @@ export class StudentDetailsComponent implements OnInit {
     modalRef.componentInstance.editMode = this.editingMode;
     modalRef.componentInstance.id = this.editingMode ? '' : this.id;
     modalRef.componentInstance.title = this.editingMode ? '' : 'Asignar curso';
-    modalRef.componentInstance.userData = this.editingMode
+    modalRef.componentInstance.studentData = this.editingMode
       ? this.selected
       : null;
   }

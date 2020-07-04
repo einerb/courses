@@ -31,7 +31,7 @@
           <th scope="col">Correo</th>
           <th scope="col">Edad</th>
           <th scope="col">Fecha creación</th>
-          <th scope="col" colspan="3">Acciones</th>
+          <th scope="col" colspan="2">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -40,23 +40,20 @@
           (dblclick)="onSelect(item)"
           (click)="setClickedRow(i)"
           [class.active]="i == selectedRow"
+          style="cursor: pointer;"
+          title="Doble click para editar"
         >
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ item.name | titlecase }}</td>
           <td>{{ item.lastname | titlecase }}</td>
           <td>{{ item.email }}</td>
-          <td>{{ item.age }}</td>
-          <td>{{ item.createdAt | date: "medium" }}</td>
+          <td>{{ item.age }} años</td>
+          <td>{{ item.createdAt | date: "fullDate":"CO" }}</td>
           <td>
             <a
               [routerLink]="['/student-details', item._id]"
               style="cursor: pointer;"
               ><i class="fa fa-external-link text-info"></i
-            ></a>
-          </td>
-          <td>
-            <a (click)="editStudent(item)" style="cursor: pointer;"
-              ><i class="fa fa-edit text-primary"></i
             ></a>
           </td>
           <td>

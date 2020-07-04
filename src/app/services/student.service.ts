@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { Constant } from '../shared/constants';
 import { GlobalService } from './global.service';
+import { Student } from '../interfaces/student.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +40,9 @@ export class StudentService {
       );
   }
 
-  public createStudent(data: any) {
+  public createStudent(student: Student) {
     return this.globalService
-      .post(Constant.Endpoints.STUDENT.CREATE, data)
+      .post(Constant.Endpoints.STUDENT.CREATE, student)
       .pipe(
         map((res) => {
           return res;
@@ -49,9 +50,9 @@ export class StudentService {
       );
   }
 
-  public updateStudent(data: any) {
+  public updateStudent(student: Student) {
     return this.globalService
-      .put(Constant.Endpoints.STUDENT.UPDATE + '/' + data.id, data)
+      .put(Constant.Endpoints.STUDENT.UPDATE + '/' + student._id, student)
       .pipe(
         map((res) => {
           return res;

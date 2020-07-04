@@ -43,7 +43,7 @@
       <h5>
         Fecha de creación:
         <small class="text-muted">{{
-          studentData?.createdAt | date: "medium"
+          studentData?.createdAt | date: "fullDate"
         }}</small>
       </h5>
     </div>
@@ -71,7 +71,6 @@
           <th scope="col">Horario</th>
           <th scope="col">Fecha inicio</th>
           <th scope="col">Fecha final</th>
-          <th scope="col">Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -81,13 +80,8 @@
           </th>
           <td>{{ item.name | titlecase }}</td>
           <td>{{ item.schedule | titlecase }}</td>
-          <td>{{ item.start_date | date: "medium" }}</td>
-          <td>{{ item.end_date | date: "medium" }}</td>
-          <td>
-            <a (click)="deleteCourse(item._id)" style="cursor: pointer;"
-              ><i class="fa fa-trash text-danger"></i
-            ></a>
-          </td>
+          <td>{{ item.start_date | date: "fullDate" }}</td>
+          <td>{{ item.end_date | date: "fullDate" }}</td>
         </tr>
         <tr *ngIf="visible">
           <td colspan="7">No hay cursos asociados!</td>

@@ -5,7 +5,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Course } from '../../interfaces/course.interface';
 import { CourseModalComponent } from '../course/course-modal/course-modal.component';
 import { CourseService } from '../../services/course.service';
-import { Student } from 'src/app/interfaces/student.interface';
 import { StudentService } from '../../services/student.service';
 
 @Component({
@@ -17,9 +16,9 @@ export class CourseComponent implements OnInit {
   public count = 0;
   public courseData: Course[];
   public editingMode: boolean;
-  public selected: Student;
+  public selected: Course;
   public selectedRow: number;
-  public userToEdit: Student;
+  public courseToEdit: Course;
   public visible = false;
 
   constructor(
@@ -36,17 +35,24 @@ export class CourseComponent implements OnInit {
     this.courseService.getAll().subscribe((res) => {
       this.courseData = res.data;
 
-      this.count = res.data.map((result) => {
-        this.studentService.countStudent(result._id).subscribe((res) => {
-          this.count = res.data;
-        });
-      });
-
       if (this.courseData.length > 0) {
         this.visible = false;
       } else {
         this.visible = true;
       }
+    });
+  }
+
+  public countStudent(id: any) {
+    this.studentService.countStudent(id).subscribe((res) => {
+      this.count = res.data;
+
+      Swal.fire({
+        icon: 'info',
+        title: 'Cantidad de estudiantes',
+        html:
+          'El curso contiene <b>' +this.count +'</b> estudiante(s) actualmente!',
+      });
     });
   }
 
@@ -64,7 +70,7 @@ export class CourseComponent implements OnInit {
         this.courseService.deleteCourse(id).subscribe(() => {
           Swal.fire(
             'Eliminado!',
-            'La orden fue eliminada exitosamente.',
+            'El curso fue eliminado exitosamente.',
             'success'
           );
           this.allCourses();
@@ -73,8 +79,8 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  public onSelect = (user: Student, index: number) => {
-    this.selected = user;
+  public onSelect = (course: Course) => {
+    this.selected = course;
     this.editCourse();
   };
 
@@ -92,15 +98,16 @@ export class CourseComponent implements OnInit {
     this.openEditCourseModal();
   }
 
-  private openEditCourseModal() {
+  public openEditCourseModal() {
     const modalRef = this.modalService.open(CourseModalComponent, {
       windowClass: 'large-modal',
     });
+
     modalRef.componentInstance.editMode = this.editingMode;
     modalRef.componentInstance.title = this.editingMode
       ? 'Editar curso'
       : 'Crear curso';
-    modalRef.componentInstance.userData = this.editingMode
+    modalRef.componentInstance.courseData = this.editingMode
       ? this.selected
       : null;
   }

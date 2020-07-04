@@ -20,12 +20,12 @@ export class StudentModalComponent implements OnInit {
   @Input() title: string;
   @Input() visible: string;
 
-  private studentDataCopy: Student;
+  public studentDataCopy: Student;
 
   private noDataChange = () => this.editStudentForm.pristine;
 
   constructor(
-    private editStudentModal: NgbActiveModal,
+    public editStudentModal: NgbActiveModal,
     private studentService: StudentService
   ) {}
 

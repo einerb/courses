@@ -20,12 +20,12 @@ export class CourseModalComponent implements OnInit {
   @Input() title: string;
   @Input() visible: string;
 
-  private courseDataCopy: Course;
+  public courseDataCopy: Course;
 
   private noDataChange = () => this.editCourseForm.pristine;
 
   constructor(
-    private editCourseModal: NgbActiveModal,
+    public editCourseModal: NgbActiveModal,
     private courseService: CourseService
   ) {}
 
@@ -36,6 +36,7 @@ export class CourseModalComponent implements OnInit {
   public onSave() {
     this.editCourseForm.ngSubmit.emit();
     if (this.editCourseForm.valid) {
+      
       if (this.editMode) {
         this.courseService.updateCourse(this.courseDataCopy).subscribe(
           () => {

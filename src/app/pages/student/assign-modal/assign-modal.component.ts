@@ -24,16 +24,16 @@ export class AssignModalComponent implements OnInit {
   @Input() courseData: Assignment;
   @Input() title: string;
   @Input() visible: string;
-  @Input() id: string;
+  @Input() id: any;
 
-  private courseDataCopy: Assignment;
+  public courseDataCopy: Assignment;
 
   private noDataChange = () => this.editAssignForm.pristine;
 
   constructor(
     private courseService: CourseService,
     private studentService: StudentService,
-    private editAssignModal: NgbActiveModal,
+    public editAssignModal: NgbActiveModal,
     private route: ActivatedRoute,
     private router: Router
   ) {}

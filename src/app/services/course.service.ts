@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { GlobalService } from './global.service';
 import { Constant } from '../shared/constants';
+import { Course } from '../interfaces/course.interface';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,17 +30,19 @@ export class CourseService {
       );
   }
 
-  public createCourse(data: any) {
-    return this.globalService.post(Constant.Endpoints.COURSE.CREATE, data).pipe(
-      map((res) => {
-        return res;
-      })
-    );
+  public createCourse(course: Course) {
+    return this.globalService
+      .post(Constant.Endpoints.COURSE.CREATE, course)
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 
-  public updateCourse(data: any) {
+  public updateCourse(course: Course) {
     return this.globalService
-      .put(Constant.Endpoints.COURSE.UPDATE + '/' + data.id, data)
+      .put(Constant.Endpoints.COURSE.UPDATE + '/' + course._id, course)
       .pipe(
         map((res) => {
           return res;
