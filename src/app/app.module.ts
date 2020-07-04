@@ -7,11 +7,8 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AssignModalComponent } from './pages/student/assign-modal/assign-modal.component';
-import { CourseModalComponent } from './pages/course/course-modal/course-modal.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { StudentModalComponent } from './pages/student/student-modal/student-modal.component';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent, FooterComponent],

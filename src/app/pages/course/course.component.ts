@@ -1,9 +1,11 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { Course } from '../../interfaces/course.interface';
 import { CourseModalComponent } from '../course/course-modal/course-modal.component';
 import { CourseService } from '../../services/course.service';
+import { Student } from 'src/app/interfaces/student.interface';
 import { StudentService } from '../../services/student.service';
 
 @Component({
@@ -12,13 +14,18 @@ import { StudentService } from '../../services/student.service';
   styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
-  public visible = false;
-  public courseData: Course[];
   public count = 0;
+  public courseData: Course[];
+  public editingMode: boolean;
+  public selected: Student;
+  public selectedRow: number;
+  public userToEdit: Student;
+  public visible = false;
 
   constructor(
     private courseService: CourseService,
     private studentService: StudentService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -66,4 +73,35 @@ export class CourseComponent implements OnInit {
     });
   }
 
+  public onSelect = (user: Student, index: number) => {
+    this.selected = user;
+    this.editCourse();
+  };
+
+  public setClickedRow = (index: number) => {
+    this.selectedRow = index;
+  };
+
+  public addCourse() {
+    this.editingMode = false;
+    this.openEditCourseModal();
+  }
+
+  public editCourse() {
+    this.editingMode = true;
+    this.openEditCourseModal();
+  }
+
+  private openEditCourseModal() {
+    const modalRef = this.modalService.open(CourseModalComponent, {
+      windowClass: 'large-modal',
+    });
+    modalRef.componentInstance.editMode = this.editingMode;
+    modalRef.componentInstance.title = this.editingMode
+      ? 'Editar curso'
+      : 'Crear curso';
+    modalRef.componentInstance.userData = this.editingMode
+      ? this.selected
+      : null;
+  }
 }

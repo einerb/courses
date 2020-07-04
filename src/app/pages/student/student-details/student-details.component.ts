@@ -1,7 +1,10 @@
 import Swal from 'sweetalert2';
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { AssignModalComponent } from '../assign-modal/assign-modal.component';
+import { Course } from 'src/app/interfaces/course.interface';
 import { CourseService } from 'src/app/services/course.service';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -15,11 +18,15 @@ export class StudentDetailsComponent implements OnInit {
   public courseData;
   public studentData;
   public visible;
+  public editingMode: boolean;
+  public selected: Course;
+  public selectedRow: number;
 
   constructor(
     private studentService: StudentService,
     private courseService: CourseService,
-    private route: ActivatedRoute,
+    private modalService: NgbModal,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -60,5 +67,21 @@ export class StudentDetailsComponent implements OnInit {
         });
       }
     });
+  }
+
+  public addAssign() {
+    this.openEditAssignModal();
+  }
+
+  private openEditAssignModal() {
+    const modalRef = this.modalService.open(AssignModalComponent, {
+      windowClass: 'large-modal',
+    });
+    modalRef.componentInstance.editMode = this.editingMode;
+    modalRef.componentInstance.id = this.editingMode ? '' : this.id;
+    modalRef.componentInstance.title = this.editingMode ? '' : 'Asignar curso';
+    modalRef.componentInstance.userData = this.editingMode
+      ? this.selected
+      : null;
   }
 }

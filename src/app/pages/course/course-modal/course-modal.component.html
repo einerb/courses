@@ -1,1 +1,83 @@
-<p>course-modal works!</p>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{ title }}</h4>
+  <button
+    type="button"
+    class="close pull-right"
+    aria-label="Close"
+    (click)="editCourseModal.dismiss('modal close')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body p-3">
+  <form #editCourseForm="ngForm">
+    <div class="form-group row">
+      <div class="col-12">
+        <label for="name">Nombre:</label>
+        <input
+          name="name"
+          class="form-control"
+          id="name"
+          [(ngModel)]="courseDataCopy.name"
+          #name="ngModel"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-12">
+        <label for="schedule">Horario:</label>
+        <input
+          name="schedule"
+          class="form-control"
+          id="schedule"
+          [(ngModel)]="courseDataCopy.schedule"
+          #schedule="ngModel"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-12">
+        <label for="start_date">Fecha inicio:</label>
+        <input
+          type="date"
+          name="start_date"
+          class="form-control"
+          id="start_date"
+          [(ngModel)]="courseDataCopy.start_date"
+          #start_date="ngModel"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-12">
+          <label for="end_date">Fecha final:</label>
+          <input
+            type="date"
+            name="end_date"
+            class="form-control"
+            id="end_date"
+            [(ngModel)]="courseDataCopy.end_date"
+            #end_date="ngModel"
+            required
+          />
+        </div>
+      </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    *ngIf="editMode"
+    type="button"
+    class="btn btn-outline-primary pull-left"
+    (click)="undoChanges()"
+  >
+    <i class="fa fa-undo"></i> Deshacer Cambios
+  </button>
+  <button type="submit" class="btn btn-success pull-right" (click)="onSave()">
+    <span *ngIf="editMode"> <i class="fa fa-check-circle"></i> Guardar </span>
+    <span *ngIf="!editMode"> <i class="fa fa-plus"></i> Crear </span>
+  </button>
+</div>

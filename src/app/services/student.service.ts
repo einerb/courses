@@ -59,9 +59,9 @@ export class StudentService {
       );
   }
 
-  public assignCourse(id: any) {
+  public assignCourse(id: any, data: any) {
     return this.globalService
-      .get(Constant.Endpoints.STUDENT.ASSIGN + '/' + id)
+      .put(Constant.Endpoints.STUDENT.ASSIGN + '/' + id, data)
       .pipe(
         map((res) => {
           return res;

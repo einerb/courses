@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 
 import { StudentDetailsRoutingModule } from './student-details-routing.module';
+import { AssignModalComponent } from '../assign-modal/assign-modal.component';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, StudentDetailsRoutingModule],
+  declarations: [AssignModalComponent],
+  imports: [CommonModule, StudentDetailsRoutingModule, FormsModule],
+  entryComponents: [AssignModalComponent],
 })
 export class StudentDetailsModule {}
