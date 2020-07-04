@@ -4,5 +4,12 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 a.btn-success {
-    color: #fff !important;
+    color: #fff;
+}
+a.btn-success:hover {
+    color: #fff;
+}
+
+.navbar {
+    margin-bottom: 30px;
 }

@@ -1,10 +1,10 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { Student } from '../../interfaces/student.interface';
 import { StudentModalComponent } from '../student/student-modal/student-modal.component';
 import { StudentService } from '../../services/student.service';
-import { Student } from '../../interfaces/student.interface';
 
 @Component({
   selector: 'app-student',
@@ -12,12 +12,16 @@ import { Student } from '../../interfaces/student.interface';
   styleUrls: ['./student.component.css'],
 })
 export class StudentComponent implements OnInit {
-  public visible = false;
+  public editingMode: boolean;
+  public selected: Student;
+  public selectedRow: number;
   public studentData: Student[];
+  public userToEdit: Student;
+  public visible = false;
 
   constructor(
     private studentService: StudentService,
-    private dialog: MatDialog,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -59,25 +63,35 @@ export class StudentComponent implements OnInit {
     });
   }
 
-  public onCreate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
-    this.dialog.open(StudentModalComponent, dialogConfig);
+  public onSelect = (user: Student, index: number) => {
+    this.selected = user;
+    this.editStudent();
+  };
+
+  public setClickedRow = (index: number) => {
+    this.selectedRow = index;
+  };
+
+  public addStudent() {
+    this.editingMode = false;
+    this.openEditStudentModal();
   }
 
-  public onEdit({ name, lastname, email, age }: Student) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
-    dialogConfig.data = {
-      name,
-      lastname,
-      email,
-      age,
-    };
-    this.dialog.open(StudentModalComponent, dialogConfig);
+  public editStudent() {
+    this.editingMode = true;
+    this.openEditStudentModal();
+  }
+
+  private openEditStudentModal() {
+    const modalRef = this.modalService.open(StudentModalComponent, {
+      windowClass: 'large-modal',
+    });
+    modalRef.componentInstance.editMode = this.editingMode;
+    modalRef.componentInstance.title = this.editingMode
+      ? 'Editar estudiante'
+      : 'Crear estudiante';
+    modalRef.componentInstance.userData = this.editingMode
+      ? this.selected
+      : null;
   }
 }

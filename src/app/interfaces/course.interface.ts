@@ -1,4 +1,4 @@
-export interface Course {
+export class Course {
   _id: string;
   name: string;
   schedule: string;

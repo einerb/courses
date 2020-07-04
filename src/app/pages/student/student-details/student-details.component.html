@@ -10,48 +10,48 @@
 
   <div class="row mt-4">
     <div class="col-md mb-3">
-      <h2>
+      <h5>
         Nombres:
         <small class="text-muted">{{ studentData?.name | titlecase }} </small>
-      </h2>
+      </h5>
     </div>
     <div class="col-md mb-3">
-      <h2>
+      <h5>
         Apellidos:
         <small class="text-muted">{{
           studentData?.lastname | titlecase
         }}</small>
-      </h2>
+      </h5>
     </div>
     <div class="col-md mb-3">
-      <h2>
+      <h5>
         Edad:
         <small class="text-muted">{{ studentData?.age }}</small>
-      </h2>
+      </h5>
     </div>
   </div>
   <div class="row">
     <div class="col-md mb-3">
-      <h2>
+      <h5>
         Correo electrónico:
         <small class="text-muted">{{ studentData?.email }}</small>
-      </h2>
+      </h5>
     </div>
   </div>
   <div class="row">
-    <div class="col-md mb-3">
-      <h2>
+    <div class="col-md mb-5">
+      <h5>
         Fecha de creación:
         <small class="text-muted">{{
           studentData?.createdAt | date: "medium"
         }}</small>
-      </h2>
+      </h5>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-xs-6 col-sm-8 col-md-9">
-      <h1>Cursos asociados</h1>
+      <h4>Cursos asociados</h4>
     </div>
     <div class="d-none d-sm-block col-sm-4 col-md-3">
       <div class="d-flex justify-content-end">

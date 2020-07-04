@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Course } from '../../interfaces/course.interface';
 import { CourseModalComponent } from '../course/course-modal/course-modal.component';
@@ -20,7 +19,6 @@ export class CourseComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private studentService: StudentService,
-    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -68,11 +66,4 @@ export class CourseComponent implements OnInit {
     });
   }
 
-  public onCreate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '60%';
-    this.dialog.open(CourseModalComponent, dialogConfig);
-  }
 }

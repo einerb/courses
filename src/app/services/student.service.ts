@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { GlobalService } from './global.service';
 import { Constant } from '../shared/constants';
+import { GlobalService } from './global.service';
 
 @Injectable({
   providedIn: 'root',

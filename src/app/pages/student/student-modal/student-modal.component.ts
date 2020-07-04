@@ -1,9 +1,12 @@
 import Swal from 'sweetalert2';
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { parse } from 'himalaya';
 
+import { Student } from '../../../interfaces/student.interface';
 import { StudentService } from '../../../services/student.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-student-modal',
@@ -11,51 +14,66 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./student-modal.component.css'],
 })
 export class StudentModalComponent implements OnInit {
-  public form: FormGroup;
+  @ViewChild('editStudentForm', { static: false }) editStudentForm: NgForm;
+  @Input() editMode: boolean;
+  @Input() studentData: Student;
+  @Input() title: string;
+  @Input() visible: string;
+
+  private studentDataCopy: Student;
+
+  private noDataChange = () => this.editStudentForm.pristine;
 
   constructor(
-    public dialogRef: MatDialogRef<StudentModalComponent>,
-    private studentService: StudentService,
-    private fb: FormBuilder,
-    //@Inject(MAT_DIALOG_DATA) { name, lastname, email, age }: Student
+    private editStudentModal: NgbActiveModal,
+    private studentService: StudentService
   ) {}
 
-  ngOnInit(): void {}
-
-  private createForm() {
-    this.form = this.fb.group({
-      _id: [''],
-      name: ['', Validators.required],
-      lastname: ['', Validators.required],
-      age: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-    });
+  ngOnInit(): void {
+    this.studentDataCopy = new Student(this.editMode ? this.studentData : null);
   }
 
-  public onClear() {
-    this.form.reset();
-    this.createForm();
-    this.onSuccess();
-  }
-
-  public onSubmit() {
-    if (this.form.valid) {
-      if (!this.form.get('_id').value)
-        this.studentService.createStudent(this.form.value);
-      else this.studentService.updateStudent(this.form.value);
-      this.form.reset();
-      this.createForm();
-      this.onClose();
+  public onSave() {
+    this.editStudentForm.ngSubmit.emit();
+    if (this.editStudentForm.valid) {
+      if (this.editMode) {
+        this.studentService.updateStudent(this.studentDataCopy).subscribe(
+          () => {
+            this.onSuccess();
+          },
+          (err) => this.onFailure(err)
+        );
+      } else {
+        this.studentService.createStudent(this.studentDataCopy).subscribe(
+          () => {
+            this.onSuccess();
+          },
+          (err) => this.onFailure(err)
+        );
+      }
+    } else {
     }
   }
 
-  public onClose() {
-    this.form.reset();
-    this.createForm();
-    this.dialogRef.close();
+  public undoChanges() {
+    this.studentDataCopy = new Student(this.studentData);
   }
 
-  public onSuccess() {
+  private onFailure = (res: HttpErrorResponse) => {
+    const json = parse(res.error);
+    const err = json[2].children[3].children[1].children[0].content;
+
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: err,
+      footer:
+        'Si el problema persiste, por favor comuníqueselo al administrador de la plataforma.',
+    });
+  };
+
+  private onSuccess() {
+    this.editStudentModal.close();
     Swal.fire('Enhorabuena!', 'Registro guardado exitosamente.', 'success');
   }
 }
