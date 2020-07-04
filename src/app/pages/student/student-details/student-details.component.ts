@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AssignModalComponent } from '../assign-modal/assign-modal.component';
 import { Course } from 'src/app/interfaces/course.interface';
@@ -25,10 +26,12 @@ export class StudentDetailsComponent implements OnInit {
     private studentService: StudentService,
     private courseService: CourseService,
     private modalService: NgbModal,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.id = this.route.snapshot.paramMap.get('_id');
     this.getId(this.id);
   }
@@ -42,6 +45,8 @@ export class StudentDetailsComponent implements OnInit {
       } else {
         this.visible = true;
       }
+
+      this.spinner.hide()
     });
   }
 

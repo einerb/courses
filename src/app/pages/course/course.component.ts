@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 import { Course } from '../../interfaces/course.interface';
 import { CourseModalComponent } from '../course/course-modal/course-modal.component';
@@ -24,10 +25,12 @@ export class CourseComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private studentService: StudentService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
+    this.spinner.show();
     this.allCourses();
   }
 
@@ -40,6 +43,8 @@ export class CourseComponent implements OnInit {
       } else {
         this.visible = true;
       }
+
+      this.spinner.hide();
     });
   }
 

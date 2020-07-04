@@ -1,27 +1,19 @@
-# Courses
+# COURSES FRONTEND
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
+Basic CRUD for the management of students and their assigned courses
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The technologies used for the development of the server-side project are NodeJs, Express and the management system of NoSql MongoDB Database.
+For the execution of the application locally, it is necessary to download and install Angular CLI [Web Oficial](https://cli.angular.io/) in the system.
 
-## Code scaffolding
+## Start the project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+For the correct operation of the application, it is necessary to download the packages already installed in the `package.json` through the command`npm install`.
+After all the packages have been downloaded, all that remains is to start the `npm start` project and start the MongoDB server.
 
-## Build
+## Technologies used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- Angular 9
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**Powered by [einerb](https://github.com/einerb)**
